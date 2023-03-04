@@ -1,5 +1,11 @@
 import java.util.Arrays;
 
+/**
+ * Program in charge of detecting if a text string is a heterogram, an isogram or a pangram.
+ * @author: José Manuel Muñoz Simó [irotdev]
+ * @version 2023.03.04/1
+ */
+
 public class Reto9Limpio {
     private static final String ALPHABET = "abcdefghijklmnñopqrstuvwxyz";
     public static void main(String[] args) {

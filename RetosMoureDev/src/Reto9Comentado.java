@@ -1,21 +1,31 @@
-// [EN] Program in charge of detecting if a text string is a heterogram, an isogram or a pangram.
-// [ES] Programa encargado de detectar si una cadena de texto es un heterograma, un isograma o un pangrama.
-
-// [EN] English - Inglés
-// Pangram: Minimal phrase that uses all the letters of the alphabet of a certain language.
-// Heterogram: Word or phrase that does not contain any repeated letter.
-// Isogram: Word or phrase in which each letter occurs the same number of times.
-
-// [ES] Español - Spanish
-// Pangrama: Frase mínima que utiliza todas las letras del alfabeto de un determinado idioma.
-// Heterograma:  Palabra o frase que no contiene ninguna letra repetida.
-// Isograma: Palabra o frase que utiliza el mismo número de letrás el mismo número de veces.
-
 import java.util.Arrays;
+
+/**
+ * [EN] Program in charge of detecting if a text string is a heterogram, an isogram or a pangram.
+ * [ES] Programa encargado de detectar si una cadena de texto es un heterograma, un isograma o un pangrama.
+ *
+ * [EN] English - Inglés
+ * Pangram: Minimal phrase that uses all the letters of the alphabet of a certain language.
+ * Heterogram: Word or phrase that does not contain any repeated letter.
+ * Isogram: Word or phrase in which each letter occurs the same number of times.
+ *
+ * [ES] Español - Spanish
+ * Pangrama: Frase mínima que utiliza todas las letras del alfabeto de un determinado idioma.
+ * Heterograma:  Palabra o frase que no contiene ninguna letra repetida.
+ * Isograma: Palabra o frase que utiliza el mismo número de letrás el mismo número de veces.
+ *
+ * @author: José Manuel Muñoz Simó [irotdev]
+ * @version 2023.03.04/1
+ */
 
 public class Reto9Comentado {
 
     private static final String ALPHABET = "abcdefghijklmnñopqrstuvwxyz";
+
+    /**
+     * Main
+     * @param args
+     */
     public static void main(String[] args) {
         StringBuilder word = new StringBuilder();
         if (args.length == 0) {
@@ -32,14 +42,15 @@ public class Reto9Comentado {
             System.out.println(" - HETEROGRAM? " + (heterogram(simplifiedWord) ? "YES" : "NO"));
             System.out.println(" - ISOGRAM? " + (isogram(simplifiedWord) ? "YES" : "NO"));
             System.out.println(" - PANGRAM? " + (pangram(simplifiedWord) ? "YES" : "NO"));
-
         } else
             System.out.println("ERROR: There is not a word.");
-
     }
 
 
-    // Simplifying a word or phrase in order to avoid problems with accents, spaces or similar.
+    /** Simplifying a word or phrase in order to avoid problems with accents, spaces or similar.
+     * @param word Word to update
+     * @return Word updated
+     */
     public static String simplifyingWord (String word) {
         String aWithAccent = "áàäÀÄ";
         String eWithAccent = "éèëÉÈË";
@@ -64,7 +75,10 @@ public class Reto9Comentado {
     }
 
 
-    // Pangram: Minimal phrase that uses all the letters of the alphabet of a certain language.
+    /** Pangram: Minimal phrase that uses all the letters of the alphabet of a certain language.
+     * @param word Word to check
+     * @return True or False
+     */
     public static boolean pangram (String word) {
         for (int i= 0; i < ALPHABET.length(); i++)
             if (word.indexOf(ALPHABET.charAt(i)) == -1)
@@ -74,9 +88,12 @@ public class Reto9Comentado {
     }
 
 
-    // Heterogram: Word or phrase that does not contain any repeated letter.
-    // The strategy is to change the string to an array, order the array, and then loop the array.
-    // If it is detected a repeated letter, it is not a heterogram (and return "false").
+    /** Heterogram: Word or phrase that does not contain any repeated letter.
+     * The strategy is to change the string to an array, order the array, and then loop the array.
+     * If it is detected a repeated letter, it is not a heterogram (and return "false").
+     * @param word Word to check
+     * @return True or False
+     */
     public static boolean heterogram (String word) {
         char[] arrayWord = word.toCharArray();
         Arrays.sort(arrayWord);
@@ -89,10 +106,13 @@ public class Reto9Comentado {
     }
 
 
-    // Isogram: Word or phrase in which each letter occurs the same number of times.
-    // The strategy is to change the string to an array, order the array, and then loop the array.
-    // In first place, it gets the number of times that the first letter appear.
-    // Later, the rest of letters are checked one by one in order to know if it is repeated the same number of times.
+    /** Isogram: Word or phrase in which each letter occurs the same number of times.
+     * The strategy is to change the string to an array, order the array, and then loop the array.
+     * In first place, it gets the number of times that the first letter appear.
+     * Later, the rest of letters are checked one by one in order to know if it is repeated the same number of times.
+     * @param word Word to check
+     * @return True or False
+     */
     public static boolean isogram (String word) {
         char[] arrayWord = word.toCharArray();
         Arrays.sort(arrayWord);
