@@ -55,20 +55,13 @@ public class Reto10 {
             JSONObject dataGet = (JSONObject) dato0.get(i);
             System.out.println(" -> " + dataGet.get("value") + "ºC at " + dataGet.get("hora") + "h.");
         }
-
-
-
-
-
-        //System.out.println(dia0);
-
-
-                //System.out.println(dataObject.getJSONArray("datos").getJSONObject(0));
-                // System.out.println(dataObject.getJSONArray("datos").getJSONObject(0).getJSONObject("type").getString("name"));
-
-
     }
 
+    /**
+     * Get the AEMET API (it will run for others API)
+     * @param urlApi
+     * @return
+     */
     private static StringBuilder getAPI(String urlApi) {
         StringBuilder data = new StringBuilder();
         try {
