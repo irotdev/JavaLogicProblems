@@ -13,3 +13,8 @@ Program in charge of detecting if a text string is a heterogram, an isogram or a
 - Pangram: Minimal phrase that uses all the letters of the alphabet of a certain language.
 - Heterogram: Word or phrase that does not contain any repeated letter.
 - Isogram: Word or phrase in which each letter occurs the same number of times.
+
+#### [11/03/2023] RetosMoureDev / Reto10
+Program in charge to use an API. In my case, I selected the AEMET API, which is "a bit" special:
+- It needs 2 calls: for the URL with the data and for the "important" data.
+- The codification has problems with accents and special characters, so it is should check ir (for do).
