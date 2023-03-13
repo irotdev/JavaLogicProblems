@@ -1,9 +1,10 @@
 import org.json.JSONArray;
 import org.json.JSONObject;
-
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Scanner;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Program that uses an API: AEMET API (weather API).
@@ -30,12 +31,11 @@ public class Reto10 {
         String url = "https://opendata.aemet.es/opendata/api/prediccion/especifica/municipio/diaria/"
                 + MUNICIPALITY + "/?api_key=" + AEMETKEY;
 
-        StringBuilder data = getAPI(url);   // First call to the 1st API
-        JSONObject jsonObject1 = new JSONObject(String.valueOf(data));
-        String url2 = jsonObject1.getString("datos");
-        StringBuilder data2 = getAPI(url2); // Second call to the 2nd API
+        JSONObject jsonObject1 = new JSONObject(getAPI(url));   // First call to the 1st API
 
-        JSONArray jsonArray = new JSONArray(String.valueOf(data2));
+        String url2 = jsonObject1.getString("datos");
+        JSONArray jsonArray = new JSONArray(getAPI(url2));      // Second call to the 2nd API
+
         JSONObject jsonObject2 = (JSONObject) jsonArray.get(0);
         String city = jsonObject2.get("nombre").toString();
         String province = jsonObject2.get("provincia").toString();
@@ -62,26 +62,26 @@ public class Reto10 {
      * @param urlApi
      * @return
      */
-    private static StringBuilder getAPI(String urlApi) {
-        StringBuilder data = new StringBuilder();
+    private static String getAPI(String urlApi) {
+        String message = "";
         try {
             URL url = new URL(urlApi);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8));
             int responseCode = con.getResponseCode();
             if (responseCode != 200) {
                 System.out.println("Error "+ responseCode);
             } else {
-                data = new StringBuilder();
-                Scanner sc = new Scanner(url.openStream());
-                while(sc.hasNext())
-                    data.append(sc.nextLine());
-
-                sc.close();
+                String line = null;
+                while ((line = in.readLine()) != null) {
+                    message += line;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return data;
+        return message;
     }
 }
