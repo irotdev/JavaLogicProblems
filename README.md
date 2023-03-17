@@ -18,3 +18,7 @@ Program in charge of detecting if a text string is a heterogram, an isogram or a
 Program in charge to use an API. In my case, I selected the AEMET API, which is "a bit" special:
 - It needs 2 calls: for the URL with the data and for the "important" data.
 - The codification has problems with accents and special characters, so it is should check ir (TODO).
+
+#### [17/03/2023] RetosMoureDev / Reto11
+Giving a URL with params, get the values of the params.
+My "own" bonus: Get the keys and values of the params.
